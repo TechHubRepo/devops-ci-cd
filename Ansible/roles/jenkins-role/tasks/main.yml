@@ -1,0 +1,55 @@
+- name: '[Jenkins] - Updating Cache Update'
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+  when: ansible_os_family == 'Debian'
+
+- name: '[Jenkins] - Getting Debian package repository'
+  get_url:
+    url: https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+    dest: /usr/share/keyrings/jenkins-keyring.asc
+  when: ansible_os_family == 'Debian'
+
+- name: '[Jenkins] - Adding a Jenkins apt repository entry'
+  apt_repository:
+    repo: deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/    
+    filename: jenkins.list
+    state: present
+    update_cache: yes
+  when: ansible_os_family == 'Debian'
+
+- name: '[Jenkins] - Installing'
+  apt:
+    name: jenkins
+    state: present
+  when: ansible_os_family == 'Debian'
+
+- name: '[Jenkins] - Starting Service'
+  ansible.builtin.systemd:
+    state: started
+    name: jenkins
+    enabled: yes
+
+- name: '[Jenkins] - Getting Initial Admin Password'
+  become: true
+  shell: cat /var/lib/jenkins/secrets/initialAdminPassword 
+  register: init_password
+  ignore_errors: true
+
+- name: '[Jenkins] - Priniting Initial Admin Password'
+  debug:
+    msg: "{{init_password.stdout_lines}}"
+
+- name: '[Jenkins] Assign a Shell to Jenkins User'
+  ansible.builtin.lineinfile:
+    path: /etc/passwd 
+    line: 'jenkins:x:113:119:Jenkins Server:/var/lib/jenkins:/bin/bash'
+
+- name: '[Jenkins] Add Jenkins User to sudoers file to get sudo access'
+  ansible.builtin.lineinfile:
+    path: /etc/sudoers
+    line: 'jenkins ALL=(ALL) NOPASSWD: ALL'
+    insertafter: '^root	ALL=(ALL:ALL) ALL'
+
+
+

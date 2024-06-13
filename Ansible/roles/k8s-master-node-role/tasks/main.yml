@@ -1,0 +1,22 @@
+- name: Creating Setup Directory
+  file: 
+    path: /home/ubuntu/k8s_setup/
+    state: directory
+
+- name: Installing Kubernetes
+  include_tasks: install-master-k8s.yml
+
+- name: Creating K8S Source Code Directory
+  file: 
+    path: /home/ubuntu/k8s
+    state: directory
+
+- name: Copying The Deployment Source Code 1
+  copy:
+    src: files/app-deployment.yml
+    dest: /home/ubuntu/k8s
+
+- name: Copying The Deployment Source Code 2
+  copy:
+    src: files/mysql-deployment.yml
+    dest: /home/ubuntu/k8s

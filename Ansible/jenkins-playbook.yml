@@ -1,0 +1,9 @@
+- name: 'Running Jenkins Playbook ... .. .'
+  hosts: [jenkins_nodes]
+  become: true  
+  roles:
+    - role: java-role
+    - role: git-role
+    - role: maven-role
+    - role: docker-role
+    - role: jenkins-role

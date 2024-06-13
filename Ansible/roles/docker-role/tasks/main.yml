@@ -1,0 +1,39 @@
+- name: '[Docker] - Updating Cache'
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+  when: ansible_os_family == 'Debian'
+
+- name: '[Docker] - Installing required system packages'
+  apt:
+    pkg:
+    - apt-transport-https
+    - ca-certificates
+    - curl
+    - gpg
+    state: latest
+    update_cache: true
+  when: ansible_os_family == 'Debian'
+
+- name: '[Docker] - Installing'
+  apt:
+    name: docker.io
+    state: latest
+    update_cache: true
+  when: ansible_os_family == 'Debian'
+
+- name: '[Docker] - Adding Group'
+  ansible.builtin.command: groupadd docker
+  ignore_errors: true
+
+- name: '[Docker] - Setting usermod'
+  ansible.builtin.command: usermod -aG docker ${USER}
+  ignore_errors: true
+
+- name: '[Docker] - Changing the Permission for docker.sock'
+  ansible.builtin.command: chmod 777 /var/run/docker.sock
+
+- name: '[Docker] - Copying "daemon.json" file'
+  template: 
+    src: files/daemon.json
+    dest: /etc/docker/

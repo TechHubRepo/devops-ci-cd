@@ -1,0 +1,45 @@
+- name: Updating Cache
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+  when: ansible_os_family == 'Debian'
+
+- name: Getting Google PGP APT Public Key
+  ansible.builtin.command: curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg -o /home/ubuntu/k8s_setup/apt-key.gpg
+
+- name: Adding Google PGP APT Public Key
+  ansible.builtin.command:  sudo apt-key add /home/ubuntu/k8s_setup/apt-key.gpg
+
+- name: Updating packages
+  ansible.builtin.command: apt-get update
+
+- name: Add Kubernetes apt-key
+  get_url:
+    url: https://pkgs.k8s.io/core:/stable:/v1.30/deb/Release.key
+    dest: /etc/apt/keyrings/kubernetes-apt-keyring.asc
+    mode: "0644"
+    force: true
+
+- name: Add Kubernetes APT repository
+  apt_repository:
+    repo: "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.asc] https://pkgs.k8s.io/core:/stable:/v1.30/deb/ /"
+    state: present
+    update_cache: yes
+
+- name: Install Kubelet
+  apt:
+    name: kubelet=1.30.*
+    state: present
+    update_cache: true
+
+- name: Install Kubeadm
+  apt:
+    name: kubeadm=1.30.*
+    state: present
+
+- name: Marking APT Hold kubelet
+  ansible.builtin.command: apt-mark hold kubelet
+
+- name: Marking APT Hold kubeadm
+  ansible.builtin.command: apt-mark hold kubeadm
+
