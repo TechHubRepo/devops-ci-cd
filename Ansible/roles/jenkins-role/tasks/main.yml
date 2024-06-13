@@ -49,7 +49,7 @@
   ansible.builtin.lineinfile:
     path: /etc/sudoers
     line: 'jenkins ALL=(ALL) NOPASSWD: ALL'
-    insertafter: '^root	ALL=(ALL:ALL) ALL'
+    insertafter: 'User privilege specification'
 
 
 

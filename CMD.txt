@@ -1,7 +1,7 @@
 ===========================================================================
 Ansible Commands
 ===========================================================================
-$ export ANSIBLE_HOST='13.235.128.29'
+$ export ANSIBLE_HOST='3.6.41.102'
 $ ssh -i ${AWS_KEY} ubuntu@${ANSIBLE_HOST}
 $ sudo hostnamectl set-hostname ansiblecontroller
 $ mkdir /home/ubuntu/.aws
@@ -35,8 +35,3 @@ $ ansible jenkins_nodes -a "docker version"
 $ ansible jenkins_nodes -a "cat /etc/passwd"
 $ ansible jenkins_nodes -a "sudo cat /etc/sudoers"
 ---------------------------------------------------------------------------
-
-
-
-
-$ sudo apt install maven
