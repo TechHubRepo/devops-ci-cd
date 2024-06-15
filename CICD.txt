@@ -20,6 +20,8 @@ Configure Jenkins
 
 Install Docker Plug-Ins in Jenkins Server
 
+    Dashboard > Manage Jenkins > Plug-Ins
+
     a) Goto Jenkins Dashboard
     b) Click on Manage Jenkins
     c) Click on Manage Plug-Ins
@@ -29,6 +31,8 @@ Install Docker Plug-Ins in Jenkins Server
 
 Install Maven Plug-Ins in Jenkins Server
 
+    Dashboard > Manage Jenkins > Plug-Ins
+
     a) Goto Jenkins Dashboard
     b) Click on Manage Jenkins
     c) Click on Manage Plug-Ins
@@ -37,6 +41,8 @@ Install Maven Plug-Ins in Jenkins Server
     f) Select the Checkbox - Restart Jenkins when Installation is Complete
 
 Configure JDK in Jenkins Server
+
+    Dashboard > Manage Jenkins > Tools
 
     a) Goto Jenkins Dashboard
     b) Click on Manage Jenkins
@@ -50,6 +56,8 @@ Configure JDK in Jenkins Server
     e) Click on Apply and Save
 
 Configure Maven in Jenkins Server
+
+    Dashboard > Manage Jenkins > Tools
 
     a) Goto Jenkins Dashboard
     b) Click on Manage Jenkins
@@ -75,7 +83,7 @@ Configure DockerHub Credentials in Jenkins Server
     g) Provide the following and Click on Create 
 
         Kind : Username with Password
-        Username : [USERNAME] 
+        Username : [USERNAME]
         Password : [PASSWORD]
         Id: MyDockerHub
 
