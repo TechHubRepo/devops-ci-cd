@@ -1,7 +1,82 @@
 ===========================================================================
 Jenkins
 ===========================================================================
+
 Username : admin
 Password : admin
 Email    : admin@gmail.com
+
+Install the following software on Jenkins Server
+
+    1. Java
+    2. Git
+    3. Maven
+    4. Docker
+    5. Jenkins
+
+----------------------------------------------------------------------------
+Configure Jenkins
+----------------------------------------------------------------------------
+
+Install Docker Plug-Ins in Jenkins Server
+
+    a) Goto Jenkins Dashboard
+    b) Click on Manage Jenkins
+    c) Click on Manage Plug-Ins
+    d) Click on Available and Search for Docker Pipeline
+    e) Select- Docker Pipeline Version 1.29 and Click on Install without Restart
+    f) Select the Checkbox - Restart Jenkins when Installation is Complete
+
+Install Maven Plug-Ins in Jenkins Server
+
+    a) Goto Jenkins Dashboard
+    b) Click on Manage Jenkins
+    c) Click on Manage Plug-Ins
+    d) Click on Available and Search for Maven Integration
+    e) Select- Maven Integration and Click on Install without Restart
+    f) Select the Checkbox - Restart Jenkins when Installation is Complete
+
+Configure JDK in Jenkins Server
+
+    a) Goto Jenkins Dashboard
+    b) Click on Manage Jenkins
+    c) Click on Tool
+    d) Click on Add JDK button and Provide the following
+
+        Name : MyJDK
+        Uncheck Install automatically
+        JAVA_HOME : /usr/lib/jvm/java-17-openjdk-amd64
+
+    e) Click on Apply and Save
+
+Configure Maven in Jenkins Server
+
+    a) Goto Jenkins Dashboard
+    b) Click on Manage Jenkins
+    c) Click on Tool
+    d) Click on Add Maven button and Provide the following
+
+        Name : MyMaven
+        Uncheck Install automatically
+        MAVEN_HOME : /usr/share/maven
+
+    e) Click on Apply and Save
+
+Configure DockerHub Credentials in Jenkins Server
+
+    Dashboard > Manage Jenkins > Credentials > System > Global credentials (unrestricted)
+
+    a) Goto Jenkins Dashboard
+    b) Click on Manage Jenkins
+    c) Click on Manage Credentials
+    d) Click on Jenkins
+    e) Select Credentials
+    f) Select Add Credentials
+    g) Provide the following and Click on Create 
+
+        Kind : Username with Password
+        Username : [USERNAME] 
+        Password : [PASSWORD]
+        Id: MyDockerHub
+
 

@@ -1,7 +1,7 @@
 ===========================================================================
 Ansible Commands
 ===========================================================================
-$ export ANSIBLE_HOST='3.6.41.102'
+$ export ANSIBLE_HOST='13.232.228.10'
 $ ssh -i ${AWS_KEY} ubuntu@${ANSIBLE_HOST}
 $ sudo hostnamectl set-hostname ansiblecontroller
 $ mkdir /home/ubuntu/.aws
