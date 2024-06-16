@@ -83,8 +83,34 @@ Configure DockerHub Credentials in Jenkins Server
     g) Provide the following and Click on Create 
 
         Kind : Username with Password
-        Username : [USERNAME]
-        Password : [PASSWORD]
+        Username : [DOCKER_HUB_USERNAME]
+        Password : [DOCKER_HUB_PASSWORD]
         Id: MyDockerHub
 
+----------------------------------------------------------------------------
+Create A Pipeline Job 
+----------------------------------------------------------------------------
 
+    Dashboard > New Item 
+        Name = DevOpsTest Project
+        Select = Pipeline Option
+        Click on OK 
+
+        Description = DevOpsTest demo Project Pipeline
+        Check Do not allow concurrent builds
+            Check Abort previous builds
+        Build Triggers = GitHub hook trigger for GITScm polling
+                Open GitHub Proect repository and add the GitHub Hook as following
+                     http://[JENKINS_HOST]:8080/github-webhook/
+        
+        Pipeline > Definition 
+            Select Pipeline Script from SCM
+            Select SCM Git
+            Add Repository URL = https://[ACCESS_TOKEN]@github.com/TechHubRepo/devopstest.git 
+            Branches to build Select Master
+
+    Click on Apply and Save
+
+Change the Code and Push to GitHub
+
+----------------------------------------------------------------------------
