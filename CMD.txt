@@ -1,7 +1,7 @@
 ===========================================================================
 Ansible Commands
 ===========================================================================
-$ export ANSIBLE_HOST='13.235.128.163'
+$ export ANSIBLE_HOST='3.111.188.162'
 $ ssh -i ${AWS_KEY} ubuntu@${ANSIBLE_HOST}
 $ sudo hostnamectl set-hostname ansiblecontroller
 $ mkdir /home/ubuntu/.aws
@@ -32,6 +32,7 @@ $ ansible jenkins_nodes -a "sudo cat /var/lib/jenkins/secrets/initialAdminPasswo
 $ ansible jenkins_nodes -a "git version"
 $ ansible jenkins_nodes -a "mvn -version"
 $ ansible jenkins_nodes -a "docker version"
+$ ansible jenkins_nodes -a "docker images"
 $ ansible jenkins_nodes -a "cat /etc/passwd"
 $ ansible jenkins_nodes -a "sudo cat /etc/sudoers"
 ---------------------------------------------------------------------------
