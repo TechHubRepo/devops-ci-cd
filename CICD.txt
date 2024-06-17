@@ -87,6 +87,8 @@ Configure DockerHub Credentials in Jenkins Server
         Password : [DOCKER_HUB_PASSWORD]
         Id: MyDockerHub
 
+Note : Currently this Option does not works so configuration of credentials not required.
+
 ----------------------------------------------------------------------------
 Create A Pipeline Job 
 ----------------------------------------------------------------------------
@@ -106,7 +108,7 @@ Create A Pipeline Job
         Pipeline > Definition 
             Select Pipeline Script from SCM
             Select SCM Git
-            Add Repository URL = https://[ACCESS_TOKEN]@github.com/TechHubRepo/devopstest.git 
+            Add Repository URL = https://[ACCESS_TOKEN]@github.com/TechHubRepo/devopstest.git
             Branches to build Select Master
 
     Click on Apply and Save

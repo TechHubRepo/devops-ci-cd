@@ -1,7 +1,8 @@
 ===========================================================================
 Ansible Commands
 ===========================================================================
-$ export ANSIBLE_HOST='3.111.188.162'
+
+$ export ANSIBLE_HOST='13.233.0.166'
 $ ssh -i ${AWS_KEY} ubuntu@${ANSIBLE_HOST}
 $ sudo hostnamectl set-hostname ansiblecontroller
 $ mkdir /home/ubuntu/.aws
@@ -11,9 +12,11 @@ $ sudo vim /etc/environment
 Logout and reconnect
 
 $ cd Ansible/
+
 ---------------------------------------------------------------------------
 Install Ansible
 ---------------------------------------------------------------------------
+
 $ sudo apt update
 $ sudo apt install software-properties-common
 $ sudo add-apt-repository --yes --update ppa:ansible/ansible
@@ -23,11 +26,13 @@ $ ansible --version
 ---------------------------------------------------------------------------
 Copy the Ansible Roles and Playbooks
 ---------------------------------------------------------------------------
+
 $ scp -r -i ${AWS_KEY} Ansible ubuntu@${ANSIBLE_HOST}:/home/ubuntu/
 ___________________________________________________________________________
 
 $ ansible all -m ping
 $ ansible-playbook jenkins-playbook.yml
+$ ansible jenkins_nodes -a "cat /.dockercfg/dockerhubpassword.txt"
 $ ansible jenkins_nodes -a "sudo cat /var/lib/jenkins/secrets/initialAdminPassword"
 $ ansible jenkins_nodes -a "git version"
 $ ansible jenkins_nodes -a "mvn -version"
@@ -35,4 +40,5 @@ $ ansible jenkins_nodes -a "docker version"
 $ ansible jenkins_nodes -a "docker images"
 $ ansible jenkins_nodes -a "cat /etc/passwd"
 $ ansible jenkins_nodes -a "sudo cat /etc/sudoers"
+
 ---------------------------------------------------------------------------

@@ -37,3 +37,14 @@
   template: 
     src: files/daemon.json
     dest: /etc/docker/
+
+- name: '[Docker] - Creating Config folder'
+  file: 
+    path: /.dockercfg
+    state: directory
+    mode: 0777
+
+- name: '[Docker] - Creating Password config file'
+  template:
+     src: files/dockerhubpassword.txt
+     dest: /.dockercfg

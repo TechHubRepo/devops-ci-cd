@@ -1,8 +1,8 @@
 [all]
-172.31.33.13
+
 
 [jenkins_nodes]
-172.31.33.13
+
 
 [k8s_master_nodes]
 
@@ -21,4 +21,3 @@ ansible_ssh_private_key_file=${AWS_KEY}
 
 [k8s_worker_nodes:vars]
 ansible_ssh_private_key_file=${AWS_KEY}
-
