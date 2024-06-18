@@ -2,9 +2,18 @@
 Jenkins
 ===========================================================================
 
-Username : admin
-Password : admin
-Email    : admin@gmail.com
+Create IAM Role - name : EC2-EKS-Acccess
+Make sure IAM Role is Available with the Following Permissions.
+
+    VPCFullAccess
+    CloudFormationFullAccess
+    IAMFullAccess
+    EC2FullAccess
+    AdminFullAccess
+
+Create an EC2 Instance for Jenkins host and associate IAM instance profile "EC2-EKS-Acccess" with it.
+
+----------------------------------------------------------------------------
 
 Install the following software on Jenkins Server
 
@@ -13,6 +22,13 @@ Install the following software on Jenkins Server
     3. Maven
     4. Docker
     5. Jenkins
+
+Note : We will use Ansible to software installation.
+
+Jenkins User details    
+    Username : admin
+    Password : admin
+    Email    : admin@gmail.com
 
 ----------------------------------------------------------------------------
 Configure Jenkins
@@ -115,4 +131,8 @@ Create A Pipeline Job
 
 Change the Code and Push to GitHub
 
-----------------------------------------------------------------------------
+
+===========================================================================
+Setup the Kubernetes Management Host
+===========================================================================
+
