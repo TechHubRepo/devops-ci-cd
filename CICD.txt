@@ -131,8 +131,31 @@ Create A Pipeline Job
 
 Change the Code and Push to GitHub
 
-
 ===========================================================================
 Setup the Kubernetes Management Host
 ===========================================================================
+
+Launch Linux EC2 Instance
+---------------------------------------------------------------------------
+Name of Instance = K-Management-Host
+
+Step 1: Choose an Amazon Machine Image (AMI)
+
+    O.S Software : Ubuntu Server 22.04 LTS (HVM), SSD Volume Type
+
+Step 2: Choose an Instance Type
+
+    Select : t2.xlarge (- ECUs, 4 vCPUs, 2.3 GHz, -, 16 GiB memory, EBS only)
+
+Step 3: Configure Instance Details
+    
+    Choosr Role : EC2-EKS-Acccess
+
+Step 4: Add Storage
+
+    Storage : 25GB
+
+Step 5: Configure Security Group
+
+Step 6: Review Instance Launch
 

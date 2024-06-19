@@ -1,0 +1,12 @@
+- name: '[Kubernetes] Downloading kubectl'
+  ansible.builtin.command: wget https://dl.k8s.io/release/v1.30.2/bin/linux/amd64/kubectl
+
+- name: '[Kubernetes] Changing kubectl permissions'
+  ansible.builtin.command: chmod +x ./kubectl
+
+- name: '[Kubernetes] Moving to user Bin'
+  ansible.builtin.command: mv ./kubectl /usr/local/bin
+
+- name: '[Kubernetes] Verifying kubectl version'
+  ansible.builtin.command: kubectl version --short --client
+
