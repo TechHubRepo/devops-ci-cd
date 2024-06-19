@@ -14,14 +14,14 @@
     state: directory
   when: ansible_os_family == 'Debian'
 
-- name: Copying The Deployment Source Code 1
-  copy:
-    src: files/app-deployment.yml
-    dest: /home/ubuntu/k8s
-  when: ansible_os_family == 'Debian'
+# - name: Copying The Deployment Source Code 1
+#   copy:
+#     src: files/app-deployment.yml
+#     dest: /home/ubuntu/k8s
+#   when: ansible_os_family == 'Debian'
 
-- name: Copying The Deployment Source Code 2
-  copy:
-    src: files/mysql-deployment.yml
-    dest: /home/ubuntu/k8s
-  when: ansible_os_family == 'Debian'
+# - name: Copying The Deployment Source Code 2
+#   copy:
+#     src: files/mysql-deployment.yml
+#     dest: /home/ubuntu/k8s
+#   when: ansible_os_family == 'Debian'

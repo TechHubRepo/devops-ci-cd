@@ -4,5 +4,6 @@
   roles:
     - role: k8s-kubectl-role
     - role: eksctl-role
-
-
+    - role: aws-iam-authenticator-role
+    - role: unzip-role
+    - role: aws-cli-role

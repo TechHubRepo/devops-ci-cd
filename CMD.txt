@@ -44,9 +44,9 @@ $ ansible jenkins_nodes -a "sudo cat /etc/sudoers"
 ===========================================================================
 EKSCTL Commands
 ===========================================================================
-$ export ANSIBLE_HOST='43.205.239.160'
-$ ssh -i ${AWS_KEY} ubuntu@${ANSIBLE_HOST}
+$ export ANSIBLE_HOST='52.66.210.95'
 $ scp -r -i ${AWS_KEY} Ansible ubuntu@${ANSIBLE_HOST}:/home/ubuntu/
+$ ssh -i ${AWS_KEY} ubuntu@${ANSIBLE_HOST}
 
 $ ansible all -m ping
 $ ansible-playbook eksctl-playbook.yml

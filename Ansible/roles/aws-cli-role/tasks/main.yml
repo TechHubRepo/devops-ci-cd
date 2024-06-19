@@ -1,0 +1,24 @@
+- name: '[AWS CLI] - Downloading'
+  get_url:
+    url: https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
+    dest: /tmp/awscli-exe-linux-x86_64.zip
+  when: ansible_os_family == 'Debian'
+
+- name: '[AWS CLI] - Unziping'
+  shell: unzip /tmp/awscli-exe-linux-x86_64.zip -d /tmp/
+  when: ansible_os_family == 'Debian'
+
+- name: '[AWS CLI] - Installing'
+  ansible.builtin.command: /tmp/aws/install
+  ignore_errors: true
+  when: ansible_os_family == 'Debian'
+
+- name: '[AWS CLI] - Verifying version'
+  shell: aws --version
+  register: out_version
+  ignore_errors: true
+  when: ansible_os_family == 'Debian'
+
+- name: '[AWS CLI] - Printing Version'
+  debug:
+    msg: "{{out_version.stdout_lines}}"
