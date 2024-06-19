@@ -29,12 +29,14 @@
     state: started
     name: jenkins
     enabled: yes
+  when: ansible_os_family == 'Debian'
 
 - name: '[Jenkins] - Getting Initial Admin Password'
   become: true
   shell: cat /var/lib/jenkins/secrets/initialAdminPassword 
   register: init_password
   ignore_errors: true
+  when: ansible_os_family == 'Debian'
 
 - name: '[Jenkins] - Priniting Initial Admin Password'
   debug:
@@ -44,12 +46,14 @@
   ansible.builtin.lineinfile:
     path: /etc/passwd 
     line: 'jenkins:x:113:119:Jenkins Server:/var/lib/jenkins:/bin/bash'
+  when: ansible_os_family == 'Debian'
 
 - name: '[Jenkins] Add Jenkins User to sudoers file to get sudo access'
   ansible.builtin.lineinfile:
     path: /etc/sudoers
     line: 'jenkins ALL=(ALL) NOPASSWD: ALL'
     insertafter: 'User privilege specification'
+  when: ansible_os_family == 'Debian'
 
 
 

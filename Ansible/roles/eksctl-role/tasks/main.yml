@@ -1,0 +1,27 @@
+- name: '[EKSCTL] Downloading'
+  get_url:
+    url: https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_Linux_amd64.tar.gz
+    dest: /tmp/
+  when: ansible_os_family == 'Debian'
+
+- name: '[EKSCTL] Extracting'
+  ansible.builtin.command: tar -xf /tmp/eksctl_Linux_amd64.tar.gz -C /tmp/
+  when: ansible_os_family == 'Debian'
+  
+- name: '[EKSCTL] Moving to User Bin'
+  ansible.builtin.command: mv /tmp/eksctl /usr/local/bin
+  when: ansible_os_family == 'Debian'
+
+- name: '[EKSCTL] Deleting Tar'
+  ansible.builtin.command: rm /tmp/eksctl_Linux_amd64.tar.gz
+  when: ansible_os_family == 'Debian'
+
+- name: '[EKSCTL] - Verifying version'
+  shell: eksctl version
+  register: eksctl_version
+  ignore_errors: true
+  when: ansible_os_family == 'Debian'
+
+- name: '[EKSCTL] - Printing Version'
+  debug:
+    msg: "{{eksctl_version.stdout_lines}}"

@@ -1,12 +1,20 @@
-- name: '[Kubernetes] Downloading kubectl'
+- name: '[Kubectl] Downloading'
   ansible.builtin.command: wget https://dl.k8s.io/release/v1.30.2/bin/linux/amd64/kubectl
+  when: ansible_os_family == 'Debian'
 
-- name: '[Kubernetes] Changing kubectl permissions'
+- name: '[Kubectl] Changing permissions'
   ansible.builtin.command: chmod +x ./kubectl
+  when: ansible_os_family == 'Debian'
 
-- name: '[Kubernetes] Moving to user Bin'
+- name: '[Kubectl] Moving to User Bin'
   ansible.builtin.command: mv ./kubectl /usr/local/bin
+  when: ansible_os_family == 'Debian'
 
-- name: '[Kubernetes] Verifying kubectl version'
-  ansible.builtin.command: kubectl version --short --client
+- name: '[Kubectl] - Verifying version'
+  shell: kubectl version
+  register: kubectl_version
+  ignore_errors: true
 
+- name: '[Kubectl] - Printing Version'
+  debug:
+    msg: "{{kubectl_version.stdout_lines}}"

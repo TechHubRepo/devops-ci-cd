@@ -25,26 +25,32 @@
 - name: '[Docker] - Adding Group'
   ansible.builtin.command: groupadd docker
   ignore_errors: true
+  when: ansible_os_family == 'Debian'
 
 - name: '[Docker] - Setting usermod'
   ansible.builtin.command: usermod -aG docker ${USER}
   ignore_errors: true
+  when: ansible_os_family == 'Debian'
 
 - name: '[Docker] - Changing the Permission for docker.sock'
   ansible.builtin.command: chmod 777 /var/run/docker.sock
+  when: ansible_os_family == 'Debian'
 
 - name: '[Docker] - Copying "daemon.json" file'
   template: 
     src: files/daemon.json
     dest: /etc/docker/
+  when: ansible_os_family == 'Debian'
 
 - name: '[Docker] - Creating Config folder'
   file: 
     path: /.dockercfg
     state: directory
     mode: 0777
+  when: ansible_os_family == 'Debian'
 
-- name: '[Docker] - Creating Password config file'
+- name: '[Docker] - Copying Password config file'
   template:
      src: files/dockerhubpassword.txt
      dest: /.dockercfg
+  when: ansible_os_family == 'Debian'

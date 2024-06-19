@@ -1,0 +1,8 @@
+- name: 'EKSCTL Playbook'
+  hosts: [k8s_master_nodes]
+  become: true  
+  roles:
+    - role: k8s-kubectl-role
+    - role: eksctl-role
+
+

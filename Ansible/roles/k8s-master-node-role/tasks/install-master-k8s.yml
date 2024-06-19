@@ -6,9 +6,11 @@
 
 - name: Getting Google PGP APT Public Key
   ansible.builtin.command: curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg -o /home/ubuntu/k8s_setup/apt-key.gpg
+  when: ansible_os_family == 'Debian'
 
 - name: Adding Google PGP APT Public Key
   ansible.builtin.command:  sudo apt-key add /home/ubuntu/k8s_setup/apt-key.gpg
+  when: ansible_os_family == 'Debian'
 
 - name: Add Kubernetes apt-key
   get_url:
@@ -16,6 +18,7 @@
     dest: .
     mode: "0644"
     force: true
+  when: ansible_os_family == 'Debian'
 
 - name: Add Kubernetes apt-key
   get_url:
@@ -23,12 +26,15 @@
     dest: .
     mode: "0644"
     force: true
+  when: ansible_os_family == 'Debian'
 
 - name: Adding Google PGP APT Public Key
   ansible.builtin.command: install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+  when: ansible_os_family == 'Debian'
 
 - name: Updating packages
   ansible.builtin.command: apt-get update
+  when: ansible_os_family == 'Debian'
 
 - name: Add Kubernetes apt-key
   get_url:
@@ -36,35 +42,42 @@
     dest: /etc/apt/keyrings/kubernetes-apt-keyring.asc
     mode: "0644"
     force: true
+  when: ansible_os_family == 'Debian'
 
 - name: Add Kubernetes APT repository
   apt_repository:
     repo: "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.asc] https://pkgs.k8s.io/core:/stable:/v1.30/deb/ /"
     state: present
     update_cache: yes
+  when: ansible_os_family == 'Debian'
 
 - name: Install kubectl
   apt:
     name: kubectl=1.30.*
     state: present
+  when: ansible_os_family == 'Debian'
 
 - name: Install Kubelet
   apt:
     name: kubelet=1.30.*
     state: present
     update_cache: true
+  when: ansible_os_family == 'Debian'
 
 - name: Install Kubeadm
   apt:
     name: kubeadm=1.30.*
     state: present
+  when: ansible_os_family == 'Debian'
 
 # - name: Marking APT Hold Kubelet
 #   ansible.builtin.command: apt-mark hold Kubelet
+#   when: ansible_os_family == 'Debian'
 
 # - name: Marking APT Hold kubectl
 #   ansible.builtin.command: apt-mark hold kubectl
+#   when: ansible_os_family == 'Debian'
 
 # - name: Marking APT Hold kubeadm
 #   ansible.builtin.command: apt-mark hold kubeadm
-
+#   when: ansible_os_family == 'Debian'

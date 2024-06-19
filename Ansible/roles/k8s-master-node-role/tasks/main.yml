@@ -2,21 +2,26 @@
   file: 
     path: /home/ubuntu/k8s_setup/
     state: directory
+  when: ansible_os_family == 'Debian'
 
 - name: Installing Kubernetes
   include_tasks: install-master-k8s.yml
+  when: ansible_os_family == 'Debian'
 
 - name: Creating K8S Source Code Directory
   file: 
     path: /home/ubuntu/k8s
     state: directory
+  when: ansible_os_family == 'Debian'
 
 - name: Copying The Deployment Source Code 1
   copy:
     src: files/app-deployment.yml
     dest: /home/ubuntu/k8s
+  when: ansible_os_family == 'Debian'
 
 - name: Copying The Deployment Source Code 2
   copy:
     src: files/mysql-deployment.yml
     dest: /home/ubuntu/k8s
+  when: ansible_os_family == 'Debian'

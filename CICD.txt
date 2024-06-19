@@ -159,3 +159,8 @@ Step 5: Configure Security Group
 
 Step 6: Review Instance Launch
 
+Step 7: Install the following softwares on K-Management-Host
+
+    Kubectl
+    eksctl
+

@@ -1,11 +1,11 @@
-- name: Installing Kubernetes on Worker Nodes
+- name: Kubernetes Playbook on Worker Nodes
   hosts: [k8s_worker_nodes]
   become: true  
   roles:
     - role: docker-role
     - role: k8s-worker-node-role
 
-- name: Installing Kubernetes on Master Nodes
+- name: Kubernetes Playbook on Master Nodes
   hosts: [k8s_master_nodes]
   become: true  
   roles:

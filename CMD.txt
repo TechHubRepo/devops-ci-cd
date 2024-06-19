@@ -2,7 +2,7 @@
 Ansible Commands
 ===========================================================================
 
-$ export ANSIBLE_HOST='13.233.0.166'
+$ export ANSIBLE_HOST='43.205.211.65'
 $ ssh -i ${AWS_KEY} ubuntu@${ANSIBLE_HOST}
 $ sudo hostnamectl set-hostname ansiblecontroller
 $ mkdir /home/ubuntu/.aws
@@ -41,4 +41,14 @@ $ ansible jenkins_nodes -a "docker images"
 $ ansible jenkins_nodes -a "cat /etc/passwd"
 $ ansible jenkins_nodes -a "sudo cat /etc/sudoers"
 
----------------------------------------------------------------------------
+===========================================================================
+EKSCTL Commands
+===========================================================================
+$ export ANSIBLE_HOST='43.205.239.160'
+$ ssh -i ${AWS_KEY} ubuntu@${ANSIBLE_HOST}
+$ scp -r -i ${AWS_KEY} Ansible ubuntu@${ANSIBLE_HOST}:/home/ubuntu/
+
+$ ansible all -m ping
+$ ansible-playbook eksctl-playbook.yml
+
+$ ansible k8s_master_nodes -a "which kubectl"

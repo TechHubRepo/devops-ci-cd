@@ -1,4 +1,4 @@
-- name: 'Running Docker Playbook ... .. .'
+- name: 'Docker Playbook'
   hosts: [k8s_nodes, k8s_managers]
   become: true  
   roles:
