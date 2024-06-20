@@ -1,0 +1,26 @@
+- name: '[HELM] Downloading' 
+  ansible.builtin.command: wget https://get.helm.sh/helm-v3.15.1-linux-amd64.tar.gz -O /tmp/helm-v3.15.1-linux-amd64.tar.gz
+  when: ansible_os_family == 'Debian'
+
+- name: '[HELM] Extracting'
+  ansible.builtin.command: tar -xvzf /tmp/helm-v3.15.1-linux-amd64.tar.gz -C /tmp
+  when: ansible_os_family == 'Debian'
+
+- name: '[HELM] Rnaming'
+  ansible.builtin.command: mv /tmp/linux-amd64 /tmp/helm-v3.15.1
+  when: ansible_os_family == 'Debian'
+
+- name: '[HELM] Moving to User local'
+  ansible.builtin.command: mv /tmp/helm-v3.15.1/helm /usr/local/bin
+  when: ansible_os_family == 'Debian'
+
+- name: '[HELM] - Verifying version'
+  shell: helm version
+  register: out
+  ignore_errors: true
+  when: ansible_os_family == 'Debian'
+
+- name: '[HELM] - Printing Version'
+  debug:
+    msg: "{{out.stdout_lines}}"
+

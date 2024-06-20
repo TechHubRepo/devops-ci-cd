@@ -7,3 +7,5 @@
     - role: aws-iam-authenticator-role
     - role: unzip-role
     - role: aws-cli-role
+    - role: helm-role
+

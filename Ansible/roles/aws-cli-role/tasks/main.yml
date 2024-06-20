@@ -6,6 +6,7 @@
 
 - name: '[AWS CLI] - Unziping'
   shell: unzip /tmp/awscli-exe-linux-x86_64.zip -d /tmp/
+  ignore_errors: true
   when: ansible_os_family == 'Debian'
 
 - name: '[AWS CLI] - Installing'
