@@ -44,7 +44,7 @@ $ ansible jenkins_nodes -a "sudo cat /etc/sudoers"
 ===========================================================================
 EKSCTL Commands
 ===========================================================================
-$ export ANSIBLE_HOST='13.232.206.220'
+$ export ANSIBLE_HOST='13.232.90.128'
 $ scp -r -i ${AWS_KEY} Ansible ubuntu@${ANSIBLE_HOST}:/home/ubuntu/
 $ ssh -i ${AWS_KEY} ubuntu@${ANSIBLE_HOST}
 
@@ -53,6 +53,14 @@ $ ansible-playbook eksctl-playbook.yml
 
 $ ansible k8s_master_nodes -a "which kubectl"
 $ ansible k8s_master_nodes -a "helm version"
+
+Verify these softwares
+
+    $ kubectl version
+    $ eksctl version
+    $ aws-iam-authenticator version
+    $ aws --version
+    $ helm version
 
 ---------------------------------------------------------------------------
 Create EKS cluster and nodes from K- Management Host
@@ -69,47 +77,39 @@ $ eksctl create cluster
 Example:
 
 $ eksctl create cluster  \
-   --name devops-test \
-   --region ap-south-1 \
-   --node-type t2.medium \
-   --nodes-min 0 \
-   --nodes-max 5
+--name devops-test \
+--region ap-south-1 \
+--node-type t2.medium \
+--nodes-min 0 \
+--nodes-max 5
 
----------------------------------------------------------------------------
+Node Group = ng-6685260d
+
 Delet the Cluster
----------------------------------------------------------------------------
 
-$ eksctl delete cluster --name=devops-test --region=ap-south-1
+    $ eksctl delete cluster --name=devops-test --region=ap-south-1
 
----------------------------------------------------------------------------
 Get the Cluster Info
----------------------------------------------------------------------------
 
-eksctl get cluster --region ap-south-1
+    $ eksctl get cluster --region ap-south-1
 
----------------------------------------------------------------------------
 Get the Nodegroup Info
----------------------------------------------------------------------------
 
-eksctl get nodegroup --cluster devops-test --region ap-south-1
+    $ eksctl get nodegroup --cluster devops-test --region ap-south-1
 
----------------------------------------------------------------------------
 Scale the Cluster as you like
----------------------------------------------------------------------------
 
-eksctl scale nodegroup  \
---region us-east-2 \
---cluster devops-test  \
---name ng-d0019ed7  \
---nodes 3
+    eksctl scale nodegroup  \
+    --region ap-south-1 \
+    --cluster devops-test  \
+    --name ng-600c5135  \
+    --nodes 2
 
-eksctl scale nodegroup  \
---region us-east-2 \
---cluster devops-test  \
---name ng-d0019ed7  \
---nodes 0
-
----------------------------------------------------------------------------
+    eksctl scale nodegroup  \
+    --region ap-south-1 \
+    --cluster devops-test  \
+    --name ng-600c5135  \
+    --nodes 0
 
 $ aws --version
 $ aws eks get-token --cluster-name=devops-test

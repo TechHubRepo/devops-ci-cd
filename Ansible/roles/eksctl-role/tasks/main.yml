@@ -25,3 +25,8 @@
 - name: '[EKSCTL] - Printing Version'
   debug:
     msg: "{{eksctl_version.stdout_lines}}"
+
+- name: '[EKSCTL] - Setting Hostname'
+  shell: hostnamectl set-hostname k8s_management_host
+  ignore_errors: true
+  when: ansible_os_family == 'Debian'

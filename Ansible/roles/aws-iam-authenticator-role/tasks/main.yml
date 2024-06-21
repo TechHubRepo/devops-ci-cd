@@ -14,7 +14,7 @@
   when: ansible_os_family == 'Debian'
 
 - name: '[AWS IAM Authenticator] - Verifying version'
-  shell: aws-iam-authenticator
+  shell: aws-iam-authenticator version
   register: out
   ignore_errors: true
   when: ansible_os_family == 'Debian'

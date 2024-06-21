@@ -10,6 +10,8 @@ Make sure IAM Role is Available with the Following Permissions.
     IAMFullAccess
     EC2FullAccess
     AdminFullAccess
+    AdministratorAccess
+
 
 Create an EC2 Instance for Jenkins host and associate IAM instance profile "EC2-EKS-Acccess" with it.
 
@@ -161,6 +163,10 @@ Step 6: Review Instance Launch
 
 Step 7: Install the following softwares on K-Management-Host
 
-    Kubectl
+    kubectl
     eksctl
+    aws-iam-authenticator
+    unzip
+    aws-cli
+    helm
 

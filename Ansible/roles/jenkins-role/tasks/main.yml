@@ -42,18 +42,20 @@
   debug:
     msg: "{{init_password.stdout_lines}}"
 
-- name: '[Jenkins] Assign a Shell to Jenkins User'
+- name: '[Jenkins] - Assign a Shell to Jenkins User'
   ansible.builtin.lineinfile:
     path: /etc/passwd 
     line: 'jenkins:x:113:119:Jenkins Server:/var/lib/jenkins:/bin/bash'
   when: ansible_os_family == 'Debian'
 
-- name: '[Jenkins] Add Jenkins User to sudoers file to get sudo access'
+- name: '[Jenkins] - Add Jenkins User to sudoers file to get sudo access'
   ansible.builtin.lineinfile:
     path: /etc/sudoers
     line: 'jenkins ALL=(ALL) NOPASSWD: ALL'
     insertafter: 'User privilege specification'
   when: ansible_os_family == 'Debian'
 
-
-
+- name: '[Jenkins] - Setting Hostname'
+  shell: hostnamectl set-hostname jenkins_host
+  ignore_errors: true
+  when: ansible_os_family == 'Debian'
