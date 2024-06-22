@@ -7,3 +7,7 @@
     - role: maven-role
     - role: docker-role
     - role: jenkins-role
+    - role: aws-iam-authenticator-role
+    - role: unzip-role
+    - role: aws-cli-role
+    - role: helm-role

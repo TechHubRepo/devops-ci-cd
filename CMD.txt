@@ -2,7 +2,7 @@
 Ansible Commands
 ===========================================================================
 
-$ export ANSIBLE_HOST='43.205.211.65'
+$ export ANSIBLE_HOST='65.2.29.77'
 $ ssh -i ${AWS_KEY} ubuntu@${ANSIBLE_HOST}
 $ sudo hostnamectl set-hostname ansiblecontroller
 $ mkdir /home/ubuntu/.aws
@@ -63,10 +63,10 @@ Verify these softwares
     $ helm version
 
 ---------------------------------------------------------------------------
-Create EKS cluster and nodes from K- Management Host
+Create EKS cluster and nodes from K-Management Host
 ---------------------------------------------------------------------------
 
-$ export K8S_MGMT_HOST='13.234.113.87'
+$ export K8S_MGMT_HOST='65.2.172.2'
 $ scp -r -i ${AWS_KEY} devopstest-chart ubuntu@${K8S_MGMT_HOST}:/home/ubuntu/devopstest-chart
 $ ssh -i ${AWS_KEY} ubuntu@${K8S_MGMT_HOST}
 
@@ -101,13 +101,13 @@ Scale the Cluster as you like
 $ eksctl scale nodegroup  \
 --region ap-south-1 \
 --cluster devops-test  \
---name ng-9bff6620  \
+--name ng-0bc5bd7f  \
 --nodes 1
 
 $ eksctl scale nodegroup  \
 --region ap-south-1 \
 --cluster devops-test  \
---name ng-9bff6620  \
+--name ng-0bc5bd7f  \
 --nodes 0
 
 Note : Configure the security group of cluster that is associated with cluster node.
@@ -128,4 +128,20 @@ Do the Kubernetes operations
     $ kubectl get services
 
 Access ->  http://[CLUSTER_NODE_IP]:32000
+
+---------------------------------------------------------------------------
+Copy the Kubeconfig from K-Management Host to Jenkins Host
+---------------------------------------------------------------------------
+
+$ cat /home/ubuntu/.kube/config
+
+$ export ANSIBLE_HOST='65.2.29.77'
+$ export K8S_MGMT_HOST='65.2.172.2'
+
+$ scp -i ${AWS_KEY} ubuntu@${K8S_MGMT_HOST}:/home/ubuntu/.kube/config ./.kube/config
+$ scp -r -i ${AWS_KEY} .kube/config ubuntu@${ANSIBLE_HOST}:/home/jenkins/.kube/config 
+
+$ ssh -i ${AWS_KEY} ubuntu@${ANSIBLE_HOST}
+$ sudo cp -r .kube /var/lib/jenkins/
+$ sudo chmod 777 /var/lib/jenkins/.kube/config
 

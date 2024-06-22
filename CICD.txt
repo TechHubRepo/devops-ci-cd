@@ -3,6 +3,7 @@ Jenkins
 ===========================================================================
 
 Create IAM Role - name : EC2-EKS-Acccess
+
 Make sure IAM Role is Available with the Following Permissions.
 
     VPCFullAccess
@@ -128,6 +129,7 @@ Create A Pipeline Job
             Select SCM Git
             Add Repository URL = https://[ACCESS_TOKEN]@github.com/TechHubRepo/devopstest.git
             Branches to build Select Master
+            Script Path = Jenkinsfile-CI
 
     Click on Apply and Save
 
@@ -169,4 +171,30 @@ Step 7: Install the following softwares on K-Management-Host
     unzip
     aws-cli
     helm
+
+===========================================================================
+Create the CD Job in Jenkins Server
+===========================================================================
+Goto Jenkins Dashboard
+
+Click on New Item
+
+Provide 
+	Item name : DevOpsTest-CD-Job
+	Select - Pipeline
+
+    Click on OK 
+
+Provide the Following
+
+Description : This is CD Job for DevOpsTest Application
+
+Pipeline 
+    Definition: Pipeline Script from SCM
+    SCM : git
+    Add Repository URL = https://[ACCESS_TOKEN]@github.com/TechHubRepo/devopstest.git
+    Branch Specifier: */jlcmaster
+    Script Path : Jenkinsfile-CD
+
+Click on Apply and then Click on Save
 
