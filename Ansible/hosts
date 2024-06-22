@@ -1,11 +1,11 @@
 [all]
-
+172.31.45.2
 
 [jenkins_nodes]
 
 
 [k8s_master_nodes]
-
+172.31.45.2
 
 [k8s_worker_nodes]
 

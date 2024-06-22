@@ -44,7 +44,7 @@ $ ansible jenkins_nodes -a "sudo cat /etc/sudoers"
 ===========================================================================
 EKSCTL Commands
 ===========================================================================
-$ export ANSIBLE_HOST='13.232.90.128'
+$ export ANSIBLE_HOST='13.127.64.118'
 $ scp -r -i ${AWS_KEY} Ansible ubuntu@${ANSIBLE_HOST}:/home/ubuntu/
 $ ssh -i ${AWS_KEY} ubuntu@${ANSIBLE_HOST}
 
@@ -66,6 +66,10 @@ Verify these softwares
 Create EKS cluster and nodes from K- Management Host
 ---------------------------------------------------------------------------
 
+$ export K8S_MGMT_HOST='13.234.113.87'
+$ scp -r -i ${AWS_KEY} devopstest-chart ubuntu@${K8S_MGMT_HOST}:/home/ubuntu/devopstest-chart
+$ ssh -i ${AWS_KEY} ubuntu@${K8S_MGMT_HOST}
+
 $ eksctl create cluster 
 --name cluster-name  \
 --region region-name \
@@ -83,9 +87,33 @@ $ eksctl create cluster  \
 --nodes-min 0 \
 --nodes-max 5
 
-Node Group = ng-6685260d
+Configure the kubeconfig
 
-Delet the Cluster
+    $ aws eks get-token --cluster-name=devops-test
+    $ aws eks update-kubeconfig --region ap-south-1 --name devops-test
+
+Get the Nodegroup Information
+
+    $ eksctl get nodegroup --cluster devops-test --region ap-south-1
+
+Scale the Cluster as you like
+
+$ eksctl scale nodegroup  \
+--region ap-south-1 \
+--cluster devops-test  \
+--name ng-9bff6620  \
+--nodes 1
+
+$ eksctl scale nodegroup  \
+--region ap-south-1 \
+--cluster devops-test  \
+--name ng-9bff6620  \
+--nodes 0
+
+Note : Configure the security group of cluster that is associated with cluster node.
+give public access.
+
+Delete the Cluster
 
     $ eksctl delete cluster --name=devops-test --region=ap-south-1
 
@@ -93,28 +121,11 @@ Get the Cluster Info
 
     $ eksctl get cluster --region ap-south-1
 
-Get the Nodegroup Info
+Do the Kubernetes operations
 
-    $ eksctl get nodegroup --cluster devops-test --region ap-south-1
+    $ kubectl get nodes
+    $ kubectl get pods
+    $ kubectl get services
 
-Scale the Cluster as you like
-
-    eksctl scale nodegroup  \
-    --region ap-south-1 \
-    --cluster devops-test  \
-    --name ng-600c5135  \
-    --nodes 2
-
-    eksctl scale nodegroup  \
-    --region ap-south-1 \
-    --cluster devops-test  \
-    --name ng-600c5135  \
-    --nodes 0
-
-$ aws --version
-$ aws eks get-token --cluster-name=devops-test
-$ aws eks update-kubeconfig --region ap-south-1 --name devops-test
-$ kubectl get nodes
-$ kubectl get pods
-$ kubectl get services
+Access ->  http://[CLUSTER_NODE_IP]:32000
 
