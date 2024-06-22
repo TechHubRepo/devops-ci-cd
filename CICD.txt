@@ -14,7 +14,7 @@ Make sure IAM Role is Available with the Following Permissions.
     AdministratorAccess
 
 
-Create an EC2 Instance for Jenkins host and associate IAM instance profile "EC2-EKS-Acccess" with it.
+Create an EC2 Instance for Jenkins-Host and associate IAM instance profile "EC2-EKS-Acccess" with it.
 
 ----------------------------------------------------------------------------
 
@@ -175,6 +175,7 @@ Step 7: Install the following softwares on K-Management-Host
 ===========================================================================
 Create the CD Job in Jenkins Server
 ===========================================================================
+
 Goto Jenkins Dashboard
 
 Click on New Item
@@ -193,8 +194,38 @@ Pipeline
     Definition: Pipeline Script from SCM
     SCM : git
     Add Repository URL = https://[ACCESS_TOKEN]@github.com/TechHubRepo/devopstest.git
-    Branch Specifier: */jlcmaster
+    Branch Specifier: */master
     Script Path : Jenkinsfile-CD
 
 Click on Apply and then Click on Save
+
+===========================================================================
+Create the CICD Job in Jenkins Server
+===========================================================================
+
+Goto Jenkins Dashboard
+
+Click on New Item
+
+	Item name : DevOpsTest CI-CD Job
+	Select - Pipeline
+    Click on OK 
+
+    Description : This is CI-CD Job for DevOpsTest Application
+
+    Check Do not allow concurrent builds
+            Check Abort previous builds
+
+        Build Triggers = GitHub hook trigger for GITScm polling
+                Open GitHub Proect repository and add the GitHub Hook as following
+                     http://[JENKINS_HOST]:8080/github-webhook/
+
+    Pipeline 
+        Definition: Pipeline Script from SCM
+        SCM : git
+        Add Repository URL = https://[ACCESS_TOKEN]@github.com/TechHubRepo/devopstest.git
+        Branch Specifier: */master
+        Script Path : Jenkinsfile
+
+    Click on Apply and then Click on Save
 
